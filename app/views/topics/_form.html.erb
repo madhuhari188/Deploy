@@ -1,0 +1,32 @@
+<%= form_with(model: topic) do |form| %>
+  <% if topic.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+        <% topic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
+  <% invalid = topic.errors.include?(:topic_name) %>
+  <div class="mb-3">
+<!--    <label for="exampleInputEmail1" class="form-label">Email address</label>-->
+    <%= form.label :topic_name, class:'form-label' %>
+    <%= form.text_field :topic_name ,class:"form-control #{'is-invalid' if invalid} " %>
+  </div>
+
+  <div>
+    <%= form.submit  class:'btn btn-success' %>
+  </div>
+<% end %>
+<!--<script>-->
+<!--    function myfunc(input){-->
+<!--        value2 = (input.value)-->
+<!--        console.log(input.value)-->
+<!--        document.getElementById("test").setAttribute('value',value2)-->
+<!--    }-->
+<!--</script>-->

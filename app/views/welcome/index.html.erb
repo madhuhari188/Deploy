@@ -1,0 +1,15 @@
+<div class="row back mt-3 rounded-3 t-text" style="height: 80vh">
+  <div class="col h-20 d-flex align-items-center justify-content-center glass-white flex-column">
+  <h1>Reading is essential for those who seek to rise above the ordinary. </h1>
+    <h6>- Jim Rohn</h6>
+
+  </div>
+    <div class="col glass d-flex align-items-center justify-content-center flex-column">
+      <% if user_signed_in? %>
+      <h2>Hai ,<%= current_user.email %></h2>
+        <h3 class="h2"> Visit Our Posts</h3>
+        <% else %>
+      <h2 class="text-center"><%= link_to 'Sign In ', new_user_session_path, class: "a-li" %>to See the latest blogs</h2>
+      <% end %>
+    </div>
+</div>

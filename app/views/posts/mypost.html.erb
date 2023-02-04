@@ -1,0 +1,15 @@
+<% if @posts.nil? %>
+  <h1> No Posts Created yet</h1>
+  <p>Create New One Under Any Topic or Create New Topic then Create Your Post</p>
+  <%= link_to "New topic", new_topic_path, class: 'btn btn-outline-success' %>
+  <%= link_to 'Topics', topics_path, class: "btn btn-outline-success"%>
+<% else %>
+  <% @posts.each do |post| %>
+    <h5><%= post.title %></h5>
+    <p><%= post.body %></p>
+    <%= link_to topic_post_path(post.topic_id,post), class: 'post btn btn-outline-success', remote: true do %>
+      <i class="bi bi-folder2-open"></i> Show
+    <% end %>
+  <% end %>
+  <% end %>
+<%#= @posts.inspect %>

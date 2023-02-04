@@ -1,0 +1,8 @@
+{
+  "name": "Ror- Blog",
+  "version": "1.0.0",
+  "dependencies": {
+    "@rails/ujs": "^7.0.4",
+    "jquery": "^3.6.3"
+  }
+}

@@ -1,0 +1,67 @@
+<div class="col-6 p-3" id="post_<%= post.id %>">
+  <div class="card shadow border-0 h-100">
+    <div class="card-body over">
+      <div class="row flex-column">
+        <div class="col">
+          <div class = "row">
+            <div class="col-5">
+              <h5 class="card-title"><%= post.title%></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= post.topic.topic_name %></h6>
+            </div>
+            <div class="col">
+              <div class="text-muted">
+                <% if post.user_id? %>
+                  Author: <%= post.user.email %>
+                <%else %>
+                  <%= "Unknown user" %>
+                <%end %>
+              </div>
+              <% if post.users.exists?(current_user.id) %>
+                <span class="badge bg-success <%= post.id %>-read">Read</span>
+              <%else %>
+                <span class="badge bg-danger <%= post.id %>-unread">Un Read</span>
+              <% end %>
+            </div>
+          </div>
+          <!--        <h5 class="card-title"><%#= post.title + " ("+Topic.find(post.topic_id).topic_name+")"  %></h5>-->
+          <p class="card-text text-truncate"><%= post.body %></p>
+          <%= link_to topic_post_path(post.topic_id,post), class: 'post btn btn-outline-success shadow-sm', remote: true do %>
+            <i class="bi bi-folder2-open"></i> Show
+          <% end %>
+          <!--      <a href="#" class="card-link">Card link</a>-->
+          <!--      <a href="#" class="card-link">Another link</a>-->
+          <!--        <p class="text-muted"><%#= Comment.find(post.id).body %></p>-->
+
+          <p><b>Tags:</b>
+            <%= post.tags.map(&:tag).join(',') %>
+          </p>
+          <div class="row">
+            <div class="col">
+              <div class="text-muted">
+                <%= post.created_at.strftime('Created At : %m/%d/%Y') %>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="text-muted d-flex justify-content-center">
+                Ratings:
+                <%= number_with_precision(post.rating_average,precision: 2)%>
+              </div>
+            </div>
+            <div class="col ">
+              <div class="text-muted">
+                <span>Commments Count:</span>
+                <%=post.comments.size  %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col mt-3 text-center">
+          <% if post.post_image.attached? %>
+            <%= image_tag url_for(post.post_image.variant(resize_to_limit: [400, 400])) %>
+          <%end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

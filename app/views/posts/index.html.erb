@@ -1,0 +1,84 @@
+<!--<p style="color: green"><%#= notice %></p>-->
+
+<h1>Posts</h1>
+<% if params.has_key?(:topic_id) %>
+ <h4 class="text-muted"><%= @topic.topic_name %></h4>
+  <% end %>
+<!--<div class="container">-->
+<% if @topic.present? != true %>
+<div>
+  <%= render 'fliter_post' %>
+</div>
+<% end %>
+<!--<h2>Filtered Post</h2>-->
+<%# @pot.each do |post| %>
+  <%#= render post %>
+<!--  <br>-->
+  <%#= render 'posts', post: post %>
+<!--     <p>-->
+  <%#= link_to "Show this post",[@topic, post] , class: 'btn btn-outline-success' %>
+  <%#= link_to "Show this post",[@topic, post]  %>
+  <%#= post.inspect %>
+<!--  </p>-->
+<%# end %>
+<% if params.has_key?(:ftr_post) %>
+<h2>Filtered Posts</h2>
+<% else %>
+<h2>All Post</h2>
+<% end %>
+  <div class="row" id="posts">
+
+<!--    <div id="posts">-->
+    <% @posts.each do |post| %>
+      <%#= render post %>
+      <br>
+      <%= render 'posts', post: post %>
+      <!--    <p>-->
+      <%#= link_to "Show this post",[@topic, post] , class: 'btn btn-outline-success' %>
+      <%#= link_to "Show this post",[@topic, post]  %>
+      <%#= post.inspect %>
+      <!--    </p>-->
+    <% end %>
+    <!--</div> -->
+  </div>
+<!--</div>-->
+<!--</div>-->
+<br>
+<div id="post_form">
+<%#= render "form", post: @post %>
+</div>
+<% if params.has_key?(:topic_id) %>
+  <%= link_to new_topic_post_path , class: 'btn btn-outline-success', remote: true do %>
+    <i class="bi bi-plus"></i> New Post
+  <% end %>
+    <%= link_to "Back ", topics_path , class: 'btn btn-outline-secondary' %>
+
+<%end %>
+<a class="link-danger open">Open</a>
+<!--<div class=”row margin-twenty5-zero margin-b-zero pagination-row”>-->
+
+<!--  <div class=”col-lg-8 col-md-8 col-sm-7 col-xs-6 padding-zero”>-->
+
+<!--    <ul class=”pagination”>-->
+
+<!--<li class=”disabled”> <%#= will_paginate(@articles, :previous_label => “ & laquo;”, :next_label => “ & raquo;”, :class=>”small - font”,:outer_window => 1, :inner_window => 0) %></li>-->
+
+<!--    </ul>-->
+
+<!--  </div>-->
+
+<!--  <div class=”col-lg-4 col-md-4 col-sm-5 col-xs-6 pagination-info”>-->
+
+<!--    <span class=”pull-right”><%#= page_entries_info(@posts) %></span>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @posts %>
+  </div>
+  <%= will_paginate @posts, :container => false %>
+</div>
+<%#= will_paginate @posts %>
+

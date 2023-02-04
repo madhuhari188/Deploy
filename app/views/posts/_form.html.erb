@@ -1,0 +1,100 @@
+<%#= form_for @post, url: [@topic,post], html: { method: :post }, remote: true , authenticity_token: true do |form| %>
+<%= form_with(model: [@topic,post] ,local: false, id:"post-f",class:"needs-validation" ) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%#= invalid = post.errors.include?(:title) %>
+<!--  <div class="mb-3">-->
+<!--    <label for="exampleFormControlInput1" class="form-label">Email address</label>-->
+<!--    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">-->
+<!--  </div>-->
+<!--  <div class="mb-3">-->
+<!--    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>-->
+<!--    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+<!--  </div>-->
+  <div class="mb-3">
+    <%= form.label :title, style: "display: block" ,class:"form-label" %>
+    <%= form.text_field :title ,class:"form-control title "%>
+    <div id="title-feedback"></div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :body, style: "display: block" ,class:"form-label"%>
+    <%= form.text_area :body , class:"form-control body"%>
+    <div id="body-feedback"></div>
+  </div>
+  <div>
+    <%= form.fields_for(:tags,Tag.new) do |tag_form| %>
+      <p>Add a new tag:</p><br>
+      <%= tag_form.label :tag %>
+      <%= tag_form.text_field :tag %>
+
+    <% end %>
+  </div>
+  <%= form.collection_select :tag_ids, Tag.all, :id, :tag, {}, {multiple: true} %>
+
+  <%= form.file_field :post_image %>
+  <%#= f.collection_select(:sector_id, Sector.all, :id, :name, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>
+
+  <div>
+    <%= form.submit  class:"btn btn-primary pst", id:"post_btn", data:{disable_with: "Saving...."} %>
+  </div>
+<% end %>
+<!--<script type="application/javascript">-->
+<!--// $(window).ajaxStart(function () {-->
+<!--//     $("#loader").show()-->
+<!--// })-->
+<!--$("#loader").hide()-->
+<!--$(document).ajaxStart(function() {-->
+<!--    $("#loader").show();-->
+<!--}).ajaxStop(function() {-->
+<!--    $(".spinner").hide();-->
+<!--});-->
+<!--</script>-->
+<!--<div id="loader" class="center">-->
+<!--  <div class="blob-1"></div>-->
+<!--  <div class="blob-2"></div>-->
+<!--</div>-->
+<% if post.id.nil? %>
+<div class="d-flex justify-content-center">
+  <div class="spinner-border" id="loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+  <% end %>
+<!--<script type="application/javascript">-->
+<!--    $(document).ajaxStart(function() {-->
+<!--        $("#loader").show();-->
+<!--    })-->
+<!--    $("#loader").hide()-->
+<!--</script>-->
+<%= javascript_tag type: 'application/javascript' do %>
+  // $(document).ajaxStart(function(e) {
+  //     e.preventDefault()
+  // $("#loader").show();
+  // })
+  // var forms = document.querySelectorAll('.needs-validation')
+  // Array.prototype.slice.call(forms)
+  // .forEach(function (form) {
+  // form.addEventListener('submit', function (event) {
+  // if (!form.checkValidity()) {
+  // event.preventDefault()
+  // event.stopPropagation()
+  // }
+  //
+  // form.classList.add('was-validated')
+  // }, false)
+  // })
+  $(".pst").on("click",function() {
+  $("#loader").show()
+  })
+  $("#loader").hide()
+<% end %>

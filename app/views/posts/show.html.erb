@@ -1,0 +1,66 @@
+
+
+<%= render @post %>
+<%#= image_tag url_for(@post.post_image.variant(resize_to_limit: [500, 500])) %>
+<div class ="row justify-content-between" >
+  <div class="col-4">
+
+
+    <b>Comments</b>
+
+<!--    <br><%#= render 'user_comment_ratings/form', user_comment_rating: @comment.user_comment_ratings.build %>-->
+
+    <% @post.comments.each do |comment|%>
+      <%# if comment.body %>
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Comment: <%= comment.body%></p>
+          <p class="card-text">Author: <%= comment.user.email%></p>
+          <% @comment = comment %>
+          <%= render 'user_comment_ratings/form', user_comment_rating: comment.user_comment_ratings.build %>
+    <%#= debug %>
+          <%= link_to 'Show', topic_post_comment_path(@topic,@post,comment),class: 'card-link btn btn-outline-success' %>
+            <% if can? :edit , comment %>
+              <%= link_to 'Edit', edit_topic_post_comment_path(@topic,@post,comment), class: 'card-link btn btn-outline-info' %>
+
+              <%#= button_to "Destroy this comment", [@topic,@post,comment], method: :delete %>
+              <%= link_to "Delete",[@topic,@post,comment], data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+            <% end %>
+
+        </div>
+      </div>
+      <%#end %>
+
+    <% end %>
+    <%= render 'comments/form', comment:@post.comments.new %>
+  </div>
+
+<div class="col-5">
+
+  <strong>Ratings</strong>
+  <%#@post.ratings.group(:post_rating).count.each do |star,value| %>
+<!--      <span>-->
+        <%#= "#{star}⭐=>#{value} " %>
+<!--      </span>-->
+
+  <%# end %>
+  <br>
+  <% line = 5 %>
+  <% 5.times do %>
+    <p>
+    <% line.times do %>
+      ⭐
+    <%end %>
+      <% if (@post.ratings.group(:post_rating).count[line]) == nil %>
+        <%= 0 %>
+        <%end %>
+      <%=@post.ratings.group(:post_rating).count[line]  %>
+
+      <% line = line - 1 %>
+    </p>
+  <% end %>
+  <%= render 'ratings/form', rating:@post.ratings.build %>
+  <%#=@post.ratings.group(:post_rating).count  %>
+</div>
+</div>
+</div>

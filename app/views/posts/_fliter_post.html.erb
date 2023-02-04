@@ -1,0 +1,16 @@
+<%= form_with scope: :ftr_post ,method: :get do |form| %>
+  <div class="row g-3 align-items-center">
+    <%= form.label :from_date ,class:"form-label col-auto"%>
+  <div class="col-auto">
+    <%= form.date_field :start_date, required: true, class:"form-control" %>
+  </div>
+    <%= form.label :to_date ,class:"form-label col-auto"%>
+  <div class="col-auto">
+    <%= form.date_field :end_date,required: true ,class:"form-control"%>
+  </div>
+    <div class="col-auto">
+  <%= form.submit "Show Details", class:"btn btn-outline-primary" %>
+    </div>
+    </div>
+
+<% end %>

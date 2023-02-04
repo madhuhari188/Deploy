@@ -1,0 +1,16 @@
+ $.ajax({
+        type: "POST",
+        url: "<%= topic_post_readstatus_path(@post.topic_id,@post) %>",
+        success: function(resp){
+            $(window).attr('location','<%=topic_post_path(@post.topic_id,@post)%>')
+
+        },
+     complete:function(data){
+         $('.<%= @post.id %>-unread').html("Read").addClass("bg-success").removeClass("bg-danger");
+     },
+        error: function(resp){
+            $(window).attr('location','<%=topic_post_path(@post.topic_id,@post)%>')
+        },
+        // dataType: dataType
+    })
+// $("#read-state").html("<%#= j render 'read-status' %>")

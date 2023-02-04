@@ -1,0 +1,55 @@
+//$('#loader').css("display","block")
+//$("#loader").show();
+//$("#loader").hide()
+//$(document).ajaxStart(function() {
+//    $("#loader").show();
+//}).ajaxStop(function() {
+//    $(".spinner").hide();
+//});
+<%# if @post.persisted? %>
+
+//window.alert("Post Created Successfully")
+//$("#posts").append("<%#= escape_javascript render('posts', post: @post) %>")
+//$("#post_form").fadeOut()
+//$("#loader").hide()
+//$(document).ajaxStop(function() {
+//    $("#loader").hide();
+//});
+<%# end %>
+
+<% if @post.errors.any? %>
+<%# @post.errors.full_messages.each do |message|%>
+//alert("<%#= message %>")
+<%# end %>
+$("#loader").hide();
+
+<% if @post.errors.include?(:title) %>
+$(".title").addClass("is-invalid")
+$("#title-feedback").html(  '<div class="invalid-feedback d-block"><% @post.errors.full_messages_for(:title).each do |error_message| %><%= error_message %>.<% end %> </div>')
+<% end %>
+<% if @post.errors.include?(:body) %>
+$(".body").addClass("is-invalid")
+$("#body-feedback").html(  '<div class="invalid-feedback d-block"><% @post.errors.full_messages_for(:body).each do |error_message| %><%= error_message %>.<% end %> </div>')
+<% end %>
+
+<% else %>
+//    $(document).ready(function () {
+        $("#loader").hide();
+    window.alert("Post Created Successfully")
+    $("#posts").append("<%= escape_javascript render('posts', post: @post) %>")
+    $("#post_form").fadeOut()
+        $('#loader').css("display","none")
+
+//    })
+    $(document).ajaxComplete(function () {
+        console.log("Hai")
+        $('#loader').css("display","none")
+    })
+
+<% end %>
+//console.log("<%#= @post.persisted? %>")
+//$(document).ajaxStart(function (){
+//    console.log("started")
+//})
+//$('#loader').css("display","none")
+//$("#loader").hide();

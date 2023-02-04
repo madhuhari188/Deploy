@@ -1,0 +1,19 @@
+<div>
+<%= javascript_tag type: 'application/javascript' do %>
+
+    window.onload = function () {
+    $(function() {
+    $.ajax({
+            type: "POST",
+            url: '<%=topic_post_readstatus_path(@post.topic_id,@post)%>',
+
+         complete:function(data){
+             $('.unread').html("read").addClass("bg-success").removeClass("bg-danger");
+         },
+        })
+    })
+    };
+
+console.log("Hai")
+<% end %>
+</div>

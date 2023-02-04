@@ -1,0 +1,167 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/*.over{*/
+/*    white-space: nowrap;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*}*/
+.glass {
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+.glass-white{
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(209, 213, 219, 0.3);
+}
+.t-text h1{
+    color: #000;
+}
+.t-text h2,.t-text h3{
+    color: #fff;
+}
+.a-li{
+    text-decoration: none;
+}
+.a-li:hover{
+    color: #000;
+}
+.back{
+    background-image: url("https://img.freepik.com/free-photo/grunge-paint-background_1409-1337.jpg?w=2000");
+}
+
+.apple_pagination {
+    background: #f1f1f1;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    padding: 1em;
+    cursor: default; }
+.apple_pagination a, .apple_pagination span {
+    padding: 0.2em 0.3em; }
+.apple_pagination .disabled {
+    color: #aaaaaa; }
+.apple_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background-color: #bebebe;
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.5;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px; }
+.apple_pagination a {
+    text-decoration: none;
+    color: black; }
+.apple_pagination a:hover, .apple_pagination a:focus {
+    text-decoration: underline; }
+
+/*.post_form{*/
+/*    display: none;*/
+/*}*/
+
+/*.center {*/
+/*    height: 100vh;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    background-image: url("97952-loading-animation-blue.gif");*/
+/*}*/
+
+/*#loader {*/
+/*    !* border: 12px solid #f3f3f3;*/
+/*		border-radius: 50%;*/
+/*		border-top: 12px solid #444444;*!*/
+/*    width: 100%;*/
+/*    height: 300%;*/
+/*    background: #000000e5;*/
+/*    z-index: 99;*/
+/*    position: fixed;*/
+/*    display: none;*/
+/*    !* animation: spin 1s linear infinite; *!*/
+/*}*/
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.center {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.blob-1,
+.blob-2 {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    background: #4f2d85;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blob-1 {
+    left: 20%;
+    animation: osc-l 2.5s ease infinite;
+}
+
+.blob-2 {
+    left: 80%;
+    animation: osc-r 2.5s ease infinite;
+    background: #ea5353;
+}
+
+@keyframes osc-l {
+    0% {
+        left: 40%;
+    }
+
+    50% {
+        left: 50%;
+    }
+
+    100% {
+        left: 40%;
+    }
+}
+
+@keyframes osc-r {
+    0% {
+        left: 60%;
+    }
+
+    50% {
+        left: 50%;
+    }
+
+    100% {
+        left: 60%;
+    }
+}
+

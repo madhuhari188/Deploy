@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg bg-light sticky-top">
+  <div class="container-fluid">
+    <%= link_to 'Tech Savvy', root_path, class: 'navbar-brand' %>
+    <!--    <a class="navbar-brand" href="#">Navbar</a>-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+        <% css_class = current_page?(topics_path) ? "active" : "" %>
+        <%= link_to 'Topics', topics_path, class: "nav-link #{css_class}"%>
+        <% css_class = current_page?(new_topic_path) ? "active" : "" %>
+        <%= link_to 'Add Topics', new_topic_path, class: "nav-link #{css_class}"%>
+        <% css_class = current_page?(posts_path) ? "active" : "" %>
+        <%= link_to 'Posts', posts_path, class: "nav-link #{css_class}"%>
+        <% css_class = current_page?(post_topic_path) ? "active" : "" %>
+        <%= link_to 'Posts-Topics', post_topic_path, class: "nav-link #{css_class}"%>
+        <% css_class = current_page?(my_post_path) ? "active" : "" %>
+        <%= link_to 'My Posts', my_post_path, class: "nav-link #{css_class}"%>
+        <% end %>
+        <%# css_class = current_page?(new_post_path) ? "active" : "" %>
+        <%#= link_to 'Create Post', new_post_path, class: "nav-link #{css_class}"%>
+        <%# css_class = current_page?(posts_path) ? "active" : "" %>
+        <%#= link_to 'Posts', posts_path, class: "nav-link #{css_class}"%>
+      </div>
+      <div class="d-flex navbar-nav">
+
+
+  <!--        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+  <!--          Edit User-->
+  <!--        </button>-->
+        <% if user_signed_in? %>
+          <div class="nav-link">User Sign In count:<%= current_user.sign_in_count  %></div>
+          <div class="nav-link"><%= current_user.last_sign_in_at.to_formatted_s(:short) %></div>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person" style="font-size: 1.5rem;"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end">
+              <li class="nav-link text-primary "><%= my_name(current_user) %></li>
+              <li><a href="#" class="nav-link link-success" data-bs-toggle = "modal" data-bs-target="#exampleModal">Edit Profile</a></li>
+<!--              <li><%#= link_to "Edit", "#model" , class: "nav-link link-success" ,"data-toggle" => "modal", 'data-target' => '#exampleModal' %></li>-->
+<!--              <li><%#= link_to "Sign out", destroy_user_session_path, data:{"turbo_method": :delete,"turbo_confirm": "Are you sure ?"},class: "nav-link link-danger" %></li>-->
+<!--              <li><button class="dropdown-item" type="button">Action</button></li>-->
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' },class: "nav-link link-danger" %>
+<!--              <li><button class="dropdown-item" type="button">Another action</button></li>-->
+<!--              <li><button class="dropdown-item" type="button">Something else here</button></li>-->
+            </ul>
+          </div>
+          <%#= link_to "Sign out", destroy_user_session_path, data:{"turbo_method": :delete,"turbo_confirm": "Are you sure ?"},class: "nav-link link-danger" %>
+<!--          <div class="nav-link"><%#= current_user.email %></div>-->
+        <%else %>
+
+          <% css_class = current_page?(new_user_session_path) ? "active" : "" %>
+          <%= link_to 'Sign In', new_user_session_path, class: "nav-link #{css_class}"%>
+
+          <% css_class = current_page?(new_user_session_path) ? "active" : "" %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link #{css_class}"%>
+        <%end %>
+      </div>
+    </div>
+  </div>
+</nav>
+<% if user_signed_in? %>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'devise/registrations/edit' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
